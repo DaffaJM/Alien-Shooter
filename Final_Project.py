@@ -9,6 +9,7 @@ merah = 255
 hijau = 0
 biru = 0
 
+x_time = 0
 
 def pesawat_user():
     global pos_x, pos_y
@@ -21,12 +22,19 @@ def pesawat_user():
     glEnd()
 
 def pesawat_alien1():
+    glTranslated(x_time, 0, 0)
     glBegin(GL_POLYGON)
     glColor3ub(255, 255, 255)
     glVertex2f(100, 600)
     glVertex2f(150, 550)
     glVertex2f(200, 600)
     glEnd()
+
+def timer(value):
+    global x_time
+    x_time -= 1
+    glutTimerFunc(33, timer, 0)
+
 
 def pesawat_alien2():
     glBegin(GL_POLYGON)
@@ -118,6 +126,7 @@ glutInitDisplayMode(GLUT_RGBA)
 glutInitWindowSize(500, 650)
 glutInitWindowPosition(0, 0)
 wind = glutCreateWindow("Alien Shooter")
+timer(0)
 glutDisplayFunc(showScreen)
 glutIdleFunc(showScreen)
 glutSpecialFunc(input_keyboard)
